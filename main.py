@@ -12,7 +12,7 @@ def main():
         "y":0
     }
     world["board"] = createBoard(15)
-    world["playerLoc"] = playerloc
+    world["playerloc"] = playerloc
     world["enemy1loc"] = enemy1loc
     world["playerName"] = getUserName()
     health = 100

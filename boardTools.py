@@ -26,20 +26,12 @@ def printBoard(world):
     for row in range(len(board)):
         
         for col in range(len(board)):
-            if world["playerLoc"]["x"]== col and world["playerLoc"]["y"]== row:
-                outputString += f"[{"X":2}]"
+            if world["playerloc"]["x"]== col and world["playerloc"]["y"]== row:
+                outputString += f"[{"††":2}]"
+            elif world["enemy1loc"]["x"]== col and world["enemy1loc"]["y"]== row:
+                outputString += f"[{"X ":2}]"
             elif board[row][col] == 0:
-
-                outputString += f"[{"":2}]"
+                outputString += f"[{" ":2}]"
         outputString += "\n"
     print(outputString, end="")
-    for row in range(len(board)):
-        
-        for col in range(len(board)):
-            if world["enemy1loc"]["x"]== col and world["enemy1loc"]["y"]== row:
-                outputString += f"[{"E":2}]"
-            elif board[row][col] == 0:
-
-                outputString += f"[{"":2}]"
-        outputString += "\n"
-    print(outputString, end="")
+    
