@@ -10,14 +10,24 @@ def printBoard(world):
     outputString = "" #empty string
     board = world["board"]
     for row in range(len(board)):
-        
         for col in range(len(board)):
             if world["playerloc"]["x"]== col and world["playerloc"]["y"]== row:
-                outputString += f"[{"X":2}]"
-            elif world["enemy1loc"]["x"]== col and world["enemy1loc"]["y"]== row:
-                outputString += f"[{"0 ":2}]"
-            elif world["enemy2loc"]["x"]== col and world["enemy2loc"]["y"]== row:
-                outputString += f"[{"0 ":2}]"
+                    if world["enemy1loc"]["x"] == world["playerloc"]["x"] and world["enemy1loc"]["y"] == world["playerloc"]["y"]:
+                        outputString += f"[{"X0":2}]"
+                    elif world["enemy2loc"]["x"] == world["playerloc"]["x"] and world["enemy2loc"]["y"] == world["playerloc"]["y"]:
+                        outputString += f"[{"X0":2}]"
+                    elif world["enemy1loc"]["x"] != world["playerloc"]["x"] or world["enemy1loc"]["y"] != world["playerloc"]["y"]:
+                        outputString += f"[{"X ":2}]"
+            elif world["enemy1loc"]["x"] == col and world["enemy1loc"]["y"] == row:
+                    if world["enemy1loc"]["x"] == world["enemy2loc"]["x"] and world["enemy1loc"]["y"] == world["enemy2loc"]["y"]:
+                        outputString += f"[{"00":2}]"
+                    elif world["enemy1loc"]["x"] != world["enemy2loc"]["x"] or world["enemy1loc"]["y"] != world["enemy2loc"]["y"]:
+                        outputString += f"[{"0 ":2}]"
+            elif world["enemy2loc"]["x"]== col and world["enemy2loc"]["y"] == row:
+                    if world["enemy1loc"]["x"] == world["enemy2loc"]["x"] and world["enemy1loc"]["y"] == world["enemy2loc"]["y"]:
+                        outputString += f"[{"00":2}]"
+                    elif world["enemy1loc"]["x"] != world["enemy2loc"]["x"] or world["enemy1loc"]["y"] != world["enemy2loc"]["y"]:
+                        outputString += f"[{"0 ":2}]"
             elif board[row][col] == 0:
                 outputString += f"[{" ":2}]"
         outputString += "\n"
