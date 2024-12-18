@@ -5,9 +5,9 @@ import random
 global health
 
 
-
+#main fuction responsible for moving player and enemies as well as keeping track of score and health
 def mainworld():
-    #generate world dictionary and input starting positions
+    #generate world dictionary and inputing board and locational data
     health = 3
     world = {}
     global playerloc
@@ -31,6 +31,7 @@ def mainworld():
     world["enemy2loc"] = enemy2loc
     userInput = getUserName()
     world["playerName"] = str(userInput)
+    #sets initial score to 0
     scorecount = 0
     hp = health
     #game loop until health runs out
@@ -47,18 +48,21 @@ def mainworld():
                 playerloc["y"] -= 1
             if userInput == 's' and playerloc['y'] < len(world["board"])-1:
                 playerloc["y"] += 1
-            #enemy 1 player tracking
+        #enemy player tracking function
             enemies()
-            #Enemy Player detector + print current health
+        #Enemy Player detector + print current health
             if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
                 hp -= 1
             if enemy2loc["x"] == playerloc["x"] and enemy2loc["y"] == playerloc["y"]:
                 hp -= 1
-            
+        #score incresed by 1 per turn
         scorecount += 1
+        #convert hp to a string
         hpstring = str(hp)
+        #displays hp and player name at the top of the screen while alive
         if hp >= 1:
             print(world["playerName"] + " :HP "+ hpstring +"/3")
+        #game over message after health hits 0
         else:
             print("GAME OVER")
             print("Score: " + str(scorecount))
