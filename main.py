@@ -2,10 +2,13 @@ from boardTools import *
 from inputProcess import *
 from Enemies import *
 import random
+global health
+
 
 
 def mainworld():
     #generate world dictionary and input starting positions
+    health = 3
     world = {}
     global playerloc
     playerloc = {
@@ -14,25 +17,26 @@ def mainworld():
     }
     global enemy1loc
     enemy1loc = {
-        "x":5,
+        "x":2,
         "y":0
     }
     global enemy2loc
     enemy2loc = {
-        "x":10,
-        "y":10
+        "x":3,
+        "y":3
     }
-    world["board"] = createBoard(15)
+    world["board"] = createBoard(10)
     world["playerloc"] = playerloc
     world["enemy1loc"] = enemy1loc
     world["enemy2loc"] = enemy2loc
-    world["playerName"] = "Chase"
-    health = 3
-    
+    userInput = getUserName()
+    world["playerName"] = str(userInput)
+    scorecount = 0
+    hp = health
     #game loop until health runs out
-    while health >= 0:
+    while hp > 0:
         #Display Board and move user
-        if health >= 0:
+        if hp > 0:
             printBoard(world)
             userInput = getUserDir()
             if userInput == 'd' and playerloc['x'] < len(world["board"])-1:
@@ -47,13 +51,17 @@ def mainworld():
             enemies()
             #Enemy Player detector + print current health
             if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
-                health -= 1
+                hp -= 1
             if enemy2loc["x"] == playerloc["x"] and enemy2loc["y"] == playerloc["y"]:
-                health -= 1
-            print(health)
-        if health <= 0:
-            health -= 1
-            print("game over")
-
+                hp -= 1
             
-mainworld()
+        scorecount += 1
+        hpstring = str(hp)
+        if hp >= 1:
+            print(world["playerName"] + " :HP "+ hpstring +"/3")
+        else:
+            print("GAME OVER")
+            print("Score: " + str(scorecount))
+            print("Check the CSV to see score history. Thanks for playing!")
+            
+            
