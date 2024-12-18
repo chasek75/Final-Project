@@ -1,34 +1,33 @@
+#main loop where game runs
+#sends and revieves variables from the other python files
 from boardTools import *
 from inputProcess import *
 from Enemies import *
 import random
+
+
 global health
-
-
 #main fuction responsible for moving player and enemies as well as keeping track of score and health
 def mainworld():
     #generate world dictionary and inputing board and locational data
     health = 3
     world = {}
     global playerloc
-    playerloc = {
-        "x":0,
-        "y":0
-    }
+    playerloc = {"x":0,"y":0}
     global enemy1loc
-    enemy1loc = {
-        "x":2,
-        "y":0
-    }
+    enemy1loc = {"x":2,"y":0}
     global enemy2loc
-    enemy2loc = {
-        "x":3,
-        "y":3
-    }
+    enemy2loc = {"x":3,"y":3}
+    global freezeloc
+    freezeloc = {"x":5,"y":5}
+    global shieldloc
+    shieldloc = {"x":5,"y":5}
     world["board"] = createBoard(10)
     world["playerloc"] = playerloc
     world["enemy1loc"] = enemy1loc
     world["enemy2loc"] = enemy2loc
+    world["freezeloc"] = freezeloc
+    world["sheildloc"] = shieldloc
     userInput = getUserName()
     world["playerName"] = str(userInput)
     #sets initial score to 0
@@ -61,11 +60,20 @@ def mainworld():
         hpstring = str(hp)
         #displays hp and player name at the top of the screen while alive
         if hp >= 1:
-            print(world["playerName"] + " :HP "+ hpstring +"/3")
+            print(world["playerName"] + " : ",end="")
+            print("\033[31m",end="")
+            print("HP "+ hpstring +"/3")
+            print("\033[0m",end="")
         #game over message after health hits 0
         else:
-            print("GAME OVER")
+            print("\033[31m",end="")
+            print("GAME OVER",end="")
+            print("\033[0m")
+            print("\033[32m",end="")
             print("Score: " + str(scorecount))
+            print("\033[0m",end="")
             print("Check the CSV to see score history. Thanks for playing!")
+
+            
             
             

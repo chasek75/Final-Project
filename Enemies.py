@@ -1,7 +1,7 @@
 import random
 #preforms enemy movement calculations
 #imports player and enemy locations from main
-#outputs new enemy locations based on player location
+#returns new enemy locations based on player location
 def enemies():
     #imports needed values from main
     from main import playerloc

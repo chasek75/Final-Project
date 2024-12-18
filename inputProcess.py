@@ -1,5 +1,6 @@
+#file gets user inputs, validates them, and returns them to mainworld function
 
-# gets user input and returns it to mainworld function
+#function gets and verifies directional inputs from user and returns them to main
 def getUserDir():
 
     validCommands = ['w','a','s','d']
@@ -11,10 +12,10 @@ def getUserDir():
             print("Not a valid command")
             continue
         return userInput
-# gets username as input and returns it to mainworld function
+#Function gets and verfifies username and returns it to mainworld function
 def getUserName():
     while True:
-        userInput = input("What's the name of your character?\n:")
+        userInput = input("Please enter a username(between 3 and 12 characters)\n:")
         userInput = userInput.upper().strip()
         #user input validation ensures length of username is 3-12 characters
         if len(userInput) > 12:
