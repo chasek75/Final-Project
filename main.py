@@ -4,26 +4,40 @@ from boardTools import *
 from inputProcess import *
 from Enemies import *
 import random
+import csv
+
 
 
 global health
 #main fuction responsible for moving player and enemies as well as keeping track of score and health
 def mainworld():
+    #read CSV file for random starting locations
+    
     #generate world dictionary and inputing board and locational data
+    
     health = 3
     world = {}
     #inputs location values
     global playerloc
-    playerloc = {"x":0,"y":0}
     global enemy1loc
-    enemy1loc = {"x":2,"y":0}
     global enemy2loc
-    enemy2loc = {"x":3,"y":3}
     global freezeloc
-    freezeloc = {"x":5,"y":5}
     global shieldloc
-    shieldloc = {"x":5,"y":5}
-    world["board"] = createBoard(10)
+    #reads CSV file and seperates lines
+    file = open("CSV.csv","r")
+    fileContents = file.read()
+    fileLines = fileContents.split("\n")
+    fileLines.pop(0)
+    #chooses random line to use for starting locations
+    gamelistvariable = random.randint(0,4)
+    gamedata = fileLines[gamelistvariable].split(",")
+    #uses location data from CSV for staring positions
+    playerloc = {"x":int(gamedata[0]),"y":int(gamedata[1])}
+    enemy1loc = {"x":int(gamedata[3]),"y":int(gamedata[4])}
+    enemy2loc = {"x":int(gamedata[5]),"y":int(gamedata[6])}
+    freezeloc = {"x":int(gamedata[7]),"y":int(gamedata[8])}
+    shieldloc = {"x":int(gamedata[9]),"y":int(gamedata[10])}
+    #inputs starting data into world dicrionary
     world["playerloc"] = playerloc
     world["enemy1loc"] = enemy1loc
     world["enemy2loc"] = enemy2loc
@@ -32,6 +46,8 @@ def mainworld():
     #get username from user and input into world dictionary
     userInput = getUserName()
     world["playerName"] = str(userInput)
+    boardsize = getdifficulty()
+    world["board"] = createBoard(boardsize)
     #sets initial score to 0
     scorecount = 0
     hp = health
@@ -41,7 +57,7 @@ def mainworld():
     Freeze = False
     global Sheild
     Sheild = bool
-    Sheild = True
+    Sheild = False
 
     #game loop until health runs out
     while hp > 0:
@@ -62,6 +78,7 @@ def mainworld():
                 playerloc["y"] += 1      
         #Enemy Player detector + print current health
         #if shield is on no dmg is taken
+            printBoard(world)
             if Sheild == False:
                 if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
                     hp -= 1

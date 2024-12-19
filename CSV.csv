@@ -1,0 +1,6 @@
+Starting Position,player x,player y,enemy 1x,enemy 1y,enemy 2x,enemy 2y,enemy 3x,enemy 3y,freeze x,freeze y,sheild x,shield y
+1,0,0,5,5,9,9,9,9,7,7,1,9
+2,5,5,0,0,9,9,0,9,2,2,9,5
+3,7,5,6,6,7,7,8,9,1,1,9,2
+4,3,9,0,5,2,2,9,7,0,0,6,6
+5,9,3,9,1,9,6,5,5,6,9,3,1

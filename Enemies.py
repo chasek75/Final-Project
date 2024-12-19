@@ -9,10 +9,10 @@ def enemies():
     from main import enemy2loc
     from main import Freeze
 
-    #enemy 1 will do 1 of 3 options (move in x,y or not at all)
-    enemy1xy = random.choice([0, 2])
+    #enemy 1 will move in x or y direction unless freeze is active
+    enemy1xy = random.randint(0, 1)
     if Freeze == True:
-        enemy1xy = 3
+        enemy1xy = 2
     #enemy1 moves in x direction towards playerlocation
     if enemy1xy == 0 :
                 if enemy1loc["x"] > playerloc["x"]:
@@ -39,8 +39,8 @@ def enemies():
                     
     
     #enemy 2 player tracking
-    #enemy2 will do 1 of 3 options (move in x,y or not at all)
-    enemy2xy = random.choice([0, 2])
+    #enemy2 will move in either x or y direction unless freeze is active
+    enemy2xy = random.randint(0, 1)
     if Freeze == True:
           enemy2xy = 2
     #enemy2 moves in x direction towards playerlocation

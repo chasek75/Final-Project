@@ -9,7 +9,7 @@ def getUserDir():
         userInput = userInput.lower().strip()
         #user input validation ensures user can only enter movement commands
         if userInput not in validCommands:
-            print("Not a valid command")
+            print("Command not valid")
             continue
         return userInput
 #Function gets and verfifies username and returns it to mainworld function
@@ -26,3 +26,18 @@ def getUserName():
             continue
 
         return userInput
+def getdifficulty():
+    while True:
+        userInput = input("Please select difficulty (easy,medium,hard):")
+        userInput = userInput.upper().strip()
+        if userInput == "EASY":
+            userInput = 15
+            return userInput
+        if userInput == "MEDIUM":
+            userInput = 12
+            return userInput
+        if userInput == "HARD":
+            userInput = 10
+            return userInput
+        if userInput != "EASY" or "MEDIUM" or "HARD":
+            print("Invalid input. Please try again")
