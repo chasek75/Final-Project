@@ -32,12 +32,23 @@ def printBoard(world):
             elif world["enemy1loc"]["x"] == col and world["enemy1loc"]["y"] == row:
                     if world["enemy1loc"]["x"] == world["enemy2loc"]["x"] and world["enemy1loc"]["y"] == world["enemy2loc"]["y"]:
                         outputString += f"[{"00":2}]"
-                    elif world["enemy1loc"]["x"] != world["enemy2loc"]["x"] or world["enemy1loc"]["y"] != world["enemy2loc"]["y"]:
+                    if world["enemy1loc"]["x"] == world["enemy3loc"]["x"] and world["enemy1loc"]["y"] == world["enemy3loc"]["y"]:
+                        outputString += f"[{"00":2}]"    
+                    else:
                         outputString += f"[{"0 ":2}]"
             elif world["enemy2loc"]["x"]== col and world["enemy2loc"]["y"] == row:
                     if world["enemy1loc"]["x"] == world["enemy2loc"]["x"] and world["enemy1loc"]["y"] == world["enemy2loc"]["y"]:
                         outputString += f"[{"00":2}]"
-                    elif world["enemy1loc"]["x"] != world["enemy2loc"]["x"] or world["enemy1loc"]["y"] != world["enemy2loc"]["y"]:
+                    if world["enemy2loc"]["x"] == world["enemy3loc"]["x"] and world["enemy2loc"]["y"] == world["enemy3loc"]["y"]:
+                        outputString += f"[{"00":2}]"
+                    else:
+                        outputString += f"[{"0 ":2}]"
+            elif world["enemy3loc"]["x"] == col and world["enemy3loc"]["y"] == row:
+                    if world["enemy3loc"]["x"] == world["enemy1loc"]["x"] and world["enemy3loc"]["y"] == world["enemy1loc"]["y"]:
+                        outputString += f"[{"00":2}]"
+                    if world["enemy3loc"]["x"] == world["enemy2loc"]["x"] and world["enemy3loc"]["y"] == world["enemy2loc"]["y"]:
+                        outputString += f"[{"00":2}]"
+                    else:
                         outputString += f"[{"0 ":2}]"
             elif board[row][col] == 0:
                 outputString += f"[{" ":2}]"
