@@ -5,10 +5,8 @@ from inputProcess import *
 from Enemies import *
 import random
 import csv
-
-
-
 global health
+
 #main fuction responsible for moving player and enemies as well as keeping track of score,health,and powerups
 def mainworld():
     #set intitial HP and create world dictionary
@@ -54,15 +52,16 @@ def mainworld():
     #create power up variables and set them to 0
     global Freeze
     Freeze = 0
-    global Sheild
-    Sheild = 0
+    global Shield
+    Shield = 0
     #game loop until health runs out
     while hp > 0:
         #Display Board and move user while health is above 0
         if hp > 0:
             printBoard(world)
-            #enemy player tracking function
-            enemies()
+            #enemy player tracking unless freeze is on
+            if Freeze == 0:
+                 enemies()
             #get userinput and adjusts player location
             userInput = getUserDir()
             if userInput == 'd' and playerloc['x'] < len(world["board"])-1:
@@ -72,18 +71,35 @@ def mainworld():
             if userInput == 'w' and playerloc['y'] > 0:
                 playerloc["y"] -= 1
             if userInput == 's' and playerloc['y'] < len(world["board"])-1:
-                playerloc["y"] += 1      
-        
+                playerloc["y"] += 1   
+        #checks if player is on sheild power up
+        # gives player sheild and removes powerup from board   
+        if playerloc["x"] == shieldloc["x"] and playerloc["y"] == shieldloc["y"]:
+            Shield = 11
+            shieldloc["x"] = 20
+            shieldloc["y"] = 20
+        #checks if player is on freeze power up
+        # gives player freeze and removes powerup from board 
+        if playerloc["x"] == freezeloc["x"] and playerloc["y"] == freezeloc["y"]:
+            Freeze = 11
+            freezeloc["x"] = 20
+            freezeloc["y"] = 20
+
         #if shield is on no dmg is taken
-            if Sheild > 0:
-                if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
+        if Shield == 0:
+            if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
                     hp -= 1
-                if enemy2loc["x"] == playerloc["x"] and enemy2loc["y"] == playerloc["y"]:
+            if enemy2loc["x"] == playerloc["x"] and enemy2loc["y"] == playerloc["y"]:
                     hp -= 1
-                if enemy3loc["x"] == playerloc["x"] and enemy3loc["y"] == playerloc["y"]:
+            if enemy3loc["x"] == playerloc["x"] and enemy3loc["y"] == playerloc["y"]:
                     hp -= 1
         #score incresed by 1 per turn
         scorecount += 1
+        #removes powerup charges each turn
+        if Shield > 0:
+             Shield -= 1
+        if Freeze > 0:
+             Freeze -= 1
         #convert hp to a string
         hpstring = str(hp)
         #displays hp in red and player name in default at the top of the screen while alive
@@ -93,11 +109,11 @@ def mainworld():
             print("\033[31m",end="")
             print("HP "+ hpstring +"/3",end="")
             print("\033[0m",end="")
-            if Freeze > 0:
+            if Shield > 0:
                 print("\033[36m",end="")
-                print(" Freeze" + "\033[0m")
+                print(" Shield " + str(Shield) + " turns left" + "\033[0m")
                 print("\033[0m",end="")
-                Freeze -=1
+                
             else:
                 print()
         #red game over message and green score display after health hits 0

@@ -25,8 +25,16 @@ def printBoard(world):
                         outputString += f"[{"X0":2}]"
                     elif world["enemy2loc"]["x"] == world["playerloc"]["x"] and world["enemy2loc"]["y"] == world["playerloc"]["y"]:
                         outputString += f"[{"X0":2}]"
+                    elif world["enemy3loc"]["x"] == world["playerloc"]["x"] and world["enemy3loc"]["y"] == world["playerloc"]["y"]:
+                         outputString += f"[{"X0":2}]"
                     elif world["enemy1loc"]["x"] != world["playerloc"]["x"] or world["enemy1loc"]["y"] != world["playerloc"]["y"]:
                         outputString += f"[{"X ":2}]"
+            #Shows Sheild powerup location
+            elif world["sheildloc"]["x"] == col and world["sheildloc"]["y"] == row:
+                 outputString += f"[{"S ":2}]"
+            #Shows freeze powerup location
+            elif world["freezeloc"]["x"] == col and world["freezeloc"]["y"] == row:
+                 outputString += f"[{"F ":2}]"
             #detects if multiple enemies are on the same tile
             #will change the output string to show both enemies
             elif world["enemy1loc"]["x"] == col and world["enemy1loc"]["y"] == row:

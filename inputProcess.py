@@ -26,6 +26,7 @@ def getUserName():
             continue
 
         return userInput
+#function gets user difficulty choice, verifies and sends back to mainworld function
 def getdifficulty():
     while True:
         userInput = input("Please select difficulty (easy,medium,hard):")
