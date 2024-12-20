@@ -41,8 +41,8 @@ def mainworld():
     world["freezeloc"] = freezeloc
     world["sheildloc"] = shieldloc
     #get username from user and input into world dictionary
-    userInput = getUserName()
-    world["playerName"] = str(userInput)
+    username = getUserName()
+    world["playerName"] = str(username)
     boardsize = getdifficulty()
     world["board"] = createBoard(boardsize)
     #sets initial score to 0
@@ -127,14 +127,10 @@ def mainworld():
             print("Score: " + str(scorecount))
             print("\033[0m",end="")
             print("Check the CSV to see score history. Thanks for playing!")
-            #opens the score csv file and adds most recent score
+            #opens the score csv file and adds most recent score with the username
             f = open("scores.csv", "r")
             ScoreString = f.read()
-            ScoreString = (ScoreString + str(scorecount) + ",")
+            ScoreString = (ScoreString + str(username) + " " + str(scorecount) + ",")
             f.close()
             f = open("scores.csv", "w")
-            f.write(str(ScoreString))
-
-            
-            
-            
+            f.write(str(ScoreString))   

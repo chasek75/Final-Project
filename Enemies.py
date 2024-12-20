@@ -11,7 +11,7 @@ def enemies():
     from main import Freeze
 
     #enemy 1 will move in x or y direction unless freeze is active
-    enemy1xy = random.randint(0, 1)
+    enemy1xy = random.randint(0, 2)
     if Freeze == True:
         enemy1xy = 2
     #enemy1 moves in x direction towards playerlocation
@@ -41,7 +41,7 @@ def enemies():
     
     #enemy 2 player tracking
     #enemy2 will move in either x or y direction unless freeze is active
-    enemy2xy = random.randint(0, 1)
+    enemy2xy = random.randint(0, 2)
     if Freeze == True:
           enemy2xy = 2
     #enemy2 moves in x direction towards playerlocation
@@ -69,7 +69,7 @@ def enemies():
                 enemy2loc["x"] += 0
 
     #enemy 3 player tracking
-    enemy3xy = random.randint(0, 1)
+    enemy3xy = random.randint(0, 2)
     if Freeze == True:
           enemy3xy = 2
     #enemy2 moves in x direction towards playerlocation
