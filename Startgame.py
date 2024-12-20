@@ -1,5 +1,4 @@
+#this file starts the main game loop
+
 from main import *
-
-
-#runs main world function
 mainworld()

@@ -1,5 +1,4 @@
-#main loop where game runs
-#sends and revieves variables from the other python files
+#This file contains the main game loop that initializes the game and ends it when the player loses all hp
 from boardTools import *
 from inputProcess import *
 from Enemies import *
@@ -12,7 +11,7 @@ def mainworld():
     #set intitial HP and create world dictionary
     health = 3
     world = {}
-    #makes location data global for use in other python files
+    #makes location data global for use in other functions
     global playerloc
     global enemy1loc
     global enemy2loc
@@ -20,7 +19,7 @@ def mainworld():
     global freezeloc
     global shieldloc
     #reads CSV file and seperates lines
-    file = open("CSV.csv","r")
+    file = open("LocationData.csv","r")
     fileContents = file.read()
     fileLines = fileContents.split("\n")
     fileLines.pop(0)
@@ -84,7 +83,6 @@ def mainworld():
             Freeze = 11
             freezeloc["x"] = 20
             freezeloc["y"] = 20
-
         #if shield is on no dmg is taken
         if Shield == 0:
             if enemy1loc["x"] == playerloc["x"] and enemy1loc["y"] == playerloc["y"]:
@@ -113,11 +111,15 @@ def mainworld():
                 print("\033[36m",end="")
                 print(" Shield " + str(Shield) + " turns left" + "\033[0m")
                 print("\033[0m",end="")
-                
+            if Freeze > 0:
+                print("\033[34m",end="")
+                print(" Freeze " + str(Freeze) + " turns left" + "\033[0m")
+                print("\033[0m",end="")
             else:
                 print()
         #red game over message and green score display after health hits 0
         else:
+            printBoard(world)
             print("\033[31m",end="")
             print("GAME OVER",end="")
             print("\033[0m")
@@ -125,6 +127,13 @@ def mainworld():
             print("Score: " + str(scorecount))
             print("\033[0m",end="")
             print("Check the CSV to see score history. Thanks for playing!")
+            #opens the score csv file and adds most recent score
+            f = open("scores.csv", "r")
+            ScoreString = f.read()
+            ScoreString = (ScoreString + str(scorecount) + ",")
+            f.close()
+            f = open("scores.csv", "w")
+            f.write(str(ScoreString))
 
             
             
